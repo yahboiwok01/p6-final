@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+        <style>
+            *{font-family:sans-serif;}
+            #settings { display: block; text-align:center}
+            #paint {border: 1px solid black; background : #333333; margin-left: auto; margin-right: auto; display: block;}
+            /* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 1400%;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-right: 100%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+#btn{
+    margin-left: 15%;
+    margin-top: 5%;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: black;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.legal{
+    position: absolute;
+    color: black;
+    font-size: 36px;
+}
+#finalHtml1{
+    top: 30%;
+    left: 40%;
+}
+#finalHtml2{
+    top: 45%;
+    left: 40%;
+}
+#button{
+    position: absolute;
+    top: 10%;
+    left: 10px;
+    color: black;
+   border: none;
+   border-radius: 5px;
+}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Social Security Generator</h2>
+            
+            
+            <input type="text" placeholder="Enter Full name" id="name">
+            <input type="date" id="dob">
+            </div>
+            
+            
+        <div id="sketch">
+          <canvas id="paint"></canvas>
+        </div>
+        
+        <div id="settings"> Colours
+          <button onclick="getColor('blue');">Blue</button>
+          <button onclick="getColor('red');">Red</button>
+          <button onclick="getColor('green');">Green</button>
+          <button onclick="getColor('white');">White</button>
+          <button onclick="getColor('#333333');">Eraser</button>
+        </div>
+        
+        <div id="settings"> Brush Size
+          <button onclick="getSize('2');">Small</button>
+          <button onclick="getSize('5');">Med</button>
+          <button onclick="getSize('10');">Large</button>
+          <button onclick="getSize('20');">X Large</button>
+        </div>
+                    
+                    <button id="btn" class="popup" onclick="myFunction()">
+                        Click me!
+                    <span class="popuptext" id="myPopup">
+                       <img src=" https://cdn5.identityforce.com/wp-content/uploads/2014/09/social-security-card-900x500.jpg " id="img">
+                       <h1>You Are Now Legal!!!</h1>
+                       <div id="finalHtml1" class="legal"></div>
+                       <div id = "finalHtml2" class="legal"></div>
+                       <input type="submit" value="print" id="button">
+                    </span>
+                </button>   
+                    
+                <script>
+                    var canvas = document.getElementById('paint');
+        var ctx = canvas.getContext('2d');
+         
+        var sketch = document.getElementById('sketch');
+        var sketch_style = getComputedStyle(sketch);
+        canvas.width = 500;
+        canvas.height = 250;
+        
+        var mouse = {x: 0, y: 0};
+         
+        /* Mouse Capturing Work */
+        canvas.addEventListener('mousemove', function(e) {
+          mouse.x = e.pageX - this.offsetLeft;
+          mouse.y = e.pageY - this.offsetTop;
+        }, false);
+        
+        /* Drawing on Paint App */
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        
+        ctx.strokeStyle = "red";
+        function getColor(colour){ctx.strokeStyle = colour;}
+        
+        function getSize(size){ctx.lineWidth = size;}
+        
+        
+        //ctx.strokeStyle = 
+        //ctx.strokeStyle = document.settings.colour[1].value;
+         
+        canvas.addEventListener('mousedown', function(e) {
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+         
+            canvas.addEventListener('mousemove', onPaint, false);
+        }, false);
+         
+        canvas.addEventListener('mouseup', function() {
+            canvas.removeEventListener('mousemove', onPaint, false);
+        }, false);
+         
+        var onPaint = function() {
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+        };
+        
+        // When the user clicks on <div>, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+
+
+
+
+
+
+var name = document.getElementById('name').value
+
+
+set1 = Math.floor((Math.random()*899)+100) 
+set2 = Math.floor((Math.random()*89)+10)
+set3 = Math.floor((Math.random()*8999)+1000)
+
+
+document.getElementById('finalHtml1').innerHTML = set1 + '-' + set2 + '-' + set3
+document.getElementById('finalHtml2').innerHTML = name
+}
+                </script>
+                
+    </body>
+</html>
